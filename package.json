@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Davidcastel26/midudev_graphql/issues"
   },
-  "homepage": "https://github.com/Davidcastel26/midudev_graphql#readme"
+  "homepage": "https://github.com/Davidcastel26/midudev_graphql#readme",
+  "dependencies": {
+    "graphql": "^16.3.0"
+  }
 }
