@@ -62,6 +62,10 @@ const typeDefs = gql`
             street: String!
             city: String!
         ) : Person
+        editNumber(
+            name:String!
+            phone: String!
+        ) : Phone
     }
 `
 
@@ -89,6 +93,18 @@ const resolvers = {
             const person = {...args, id:uuid()}
             persons.push(person) // update database with new person
             return person
+        },
+        editNumber : (root, args) => {
+            //we will get the person who has the name that we are working on, and we save as index
+            const personIndex = persons.findIndex(p => p.name === args.name)
+            // if the index is -1 means that there is no person with that name so we'll return null
+            if(personIndex === -1 ) return null
+            
+            const person = persons[personIndex]
+
+            const updatePerson = {...person, phone: args.phone}
+            persons[personIndex] = updatePerson
+            return updatePerson
         }
     },
     Person: {
