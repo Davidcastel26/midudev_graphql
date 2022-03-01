@@ -28,7 +28,6 @@ const persons = [
 ]
 
 const typeDefs = gql`
-
     type Address {
         street: String!
         city: String!
@@ -56,7 +55,7 @@ const typeDefs = gql`
             phone: String
             street: String!
             city: String!
-        )
+        ) : Person
     }
 `
 
