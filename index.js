@@ -1,6 +1,7 @@
 import { gql } from 'apollo-server'
 import { ApolloServer, UserInputError } from 'apollo-server'
 import {v4 as uuid} from 'uuid'
+import axios from 'axios'
 
 const persons = [
     {
@@ -72,12 +73,16 @@ const typeDefs = gql`
 const resolvers = {
     Query:{
         personCount: () => persons.length,
-        allPersons: (root, args) => {
-            if(!args.phone) return persons
+        //check this will be an async function
+        allPersons: async (root, args) => {
+            //that's why we are using AWAIT and check the imports there's an axios there
+            const {data: personsFromRESTapi} = await axios.get(`http://localhost:3000/persons`)
+            console.log(personsFromRESTapi);
+            if(!args.phone) return personsFromRESTapi
             
             const byPhone = person => args.phone === "YES"? person.phone : !person.phone ;
               
-            return persons.filter(byPhone)
+            return personsFromRESTapi.filter(byPhone)
         },
         findPerson: (root, args) => {
             const {name} = args
