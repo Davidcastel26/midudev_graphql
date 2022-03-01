@@ -1,5 +1,5 @@
 import { gql } from 'apollo-server'
-import { ApolloServer } from 'apollo-server'
+import { ApolloServer, UserInputError } from 'apollo-server'
 import {v4 as uuid} from 'uuid'
 
 const persons = [
@@ -28,6 +28,12 @@ const persons = [
 ]
 
 const typeDefs = gql`
+
+    enum YesNo {
+        YES
+        NO
+    }
+
     type Address {
         street: String!
         city: String!
@@ -45,7 +51,7 @@ const typeDefs = gql`
 
     type Query {
         personCount: Int!
-        allPersons:[Person]!
+        allPersons(phone: YesNo):[Person]!
         findPerson(name: String!): Person
     } 
 
@@ -62,7 +68,13 @@ const typeDefs = gql`
 const resolvers = {
     Query:{
         personCount: () => persons.length,
-        allPersons: () => persons,
+        allPersons: (root, args) => {
+            if(!args.phone) return persons
+            
+            const byPhone = person => args.phone === "YES"? person.phone : !person.phone ;
+              
+            return persons.filter(byPhone)
+        },
         findPerson: (root, args) => {
             const {name} = args
             return persons.find(person => person.name === name)
@@ -71,7 +83,8 @@ const resolvers = {
     Mutation:{
         addPerson : (root, args) =>{
             if(persons.find(p => p.name === args.name && p.phone === args.phone)){
-                throw new Error('It seems that the info is duplicated')
+                throw new UserInputError('It seems that the info is duplicated', 
+                { invalidArgs: args.name })
             }
             const person = {...args, id:uuid()}
             persons.push(person) // update database with new person
