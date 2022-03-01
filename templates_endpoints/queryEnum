@@ -1,0 +1,6 @@
+query{
+  allPersons(phone: NO) {
+    name
+    phone
+  }
+}
