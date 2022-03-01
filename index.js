@@ -70,6 +70,9 @@ const resolvers = {
     },
     Mutation:{
         addPerson : (root, args) =>{
+            if(persons.find(p => p.name === args.name && p.phone === args.phone)){
+                throw new Error('It seems that the info is duplicated')
+            }
             const person = {...args, id:uuid()}
             persons.push(person) // update database with new person
             return person
