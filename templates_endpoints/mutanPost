@@ -1,0 +1,11 @@
+mutation($name: String!, $street: String!, $city: String!){
+  addPerson(name: "Dave", phone:"222-222", street: "19 ave A 3 67", city: "Guatemala") {
+    name
+    phone
+    address {
+      city
+      street
+    }
+  }
+}
+
