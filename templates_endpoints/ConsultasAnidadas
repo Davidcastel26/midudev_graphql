@@ -1,0 +1,9 @@
+query{
+  personCount
+  personData: allPersons {
+    id
+  }
+  personWihtPhone: allPersons(phone: YES) {
+    name
+  }
+}
