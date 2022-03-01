@@ -1,0 +1,5 @@
+mutation($name: String!, $phone: String!){
+  editNumber(name: "dave", phone: "411-111") {
+    name
+  }
+}

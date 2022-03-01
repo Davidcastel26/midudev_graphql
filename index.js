@@ -65,7 +65,7 @@ const typeDefs = gql`
         editNumber(
             name:String!
             phone: String!
-        ) : Phone
+        ) : Person
     }
 `
 
@@ -81,6 +81,7 @@ const resolvers = {
         },
         findPerson: (root, args) => {
             const {name} = args
+            // find is a method that contain already so we are looking for the user with the same name we are sending
             return persons.find(person => person.name === name)
         }
     },
@@ -99,11 +100,13 @@ const resolvers = {
             const personIndex = persons.findIndex(p => p.name === args.name)
             // if the index is -1 means that there is no person with that name so we'll return null
             if(personIndex === -1 ) return null
-            
+            // if the person is created we'll get the person index with the data
             const person = persons[personIndex]
-
+            // we are returning the same person but the phone is the one who is throught the info
             const updatePerson = {...person, phone: args.phone}
+            // with the original data, we are replacing the data
             persons[personIndex] = updatePerson
+            // then we will returning
             return updatePerson
         }
     },
