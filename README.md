@@ -5,6 +5,6 @@ to get the json from an object
     use it into the console from the browser
 
 ----
-to run the server 
+## to run the server 
  npx nodemon index.js
  npm run json-server
