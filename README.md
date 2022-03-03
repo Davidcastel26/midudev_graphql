@@ -6,5 +6,5 @@ to get the json from an object
 
 ----
 ## to run the server 
- npx nodemon index.js
- npm run json-server
+    npx nodemon index.js
+    npm run json-server
