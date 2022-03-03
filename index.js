@@ -76,7 +76,7 @@ const resolvers = {
         //check this will be an async function
         allPersons: async (root, args) => {
             //that's why we are using AWAIT and check the imports there's an axios there
-            const {data: personsFromRESTapi} = await axios.get(`http://localhost:3000/persons`)
+            const {data: personsFromRESTapi} = await axios.get(`http://localhost:3002/persons`)
             console.log(personsFromRESTapi);
             if(!args.phone) return personsFromRESTapi
             
