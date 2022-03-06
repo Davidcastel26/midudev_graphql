@@ -5,21 +5,21 @@ import axios from 'axios'
 
 const persons = [
     {
-        name:'dave',
+        name: "ale",
         phone:'435-3456',
         street:'calle promesas',
         city:'buenos Aires',
         id:'12'
     },
     {
-        name:'dave2',
+        name: "ale3",
         street:'Avenida fullstack',
         phone:'999-3456',
         city:'Guate',
         id:'1'
     },
     {
-        name:'dave3',
+        name: "aless",
         street:'Pasaje Testing',
         phone:'00777756',
         city:'Ibiza',
