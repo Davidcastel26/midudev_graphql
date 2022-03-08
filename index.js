@@ -78,6 +78,9 @@ const resolvers = {
             //that's why we are using AWAIT and check the imports there's an axios there
             const {data: personsFromRESTapi} = await axios.get(`http://localhost:3002/persons`)
             console.log(personsFromRESTapi);
+
+            
+
             if(!args.phone) return personsFromRESTapi
             
             const byPhone = person => args.phone === "YES"? person.phone : !person.phone ;
