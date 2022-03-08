@@ -100,8 +100,8 @@ const resolvers = {
                 { invalidArgs: args.name })
             }
             const person = {...args, id:uuid()}
-            persons.push(person) // update database with new person
-            return person
+            const p = await axios.post(persons.push(person)) // update database with new person
+            return p
         },
         editNumber : (root, args) => {
             //we will get the person who has the name that we are working on, and we save as index
