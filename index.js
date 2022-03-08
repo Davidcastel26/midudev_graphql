@@ -94,7 +94,7 @@ const resolvers = {
         }
     },
     Mutation:{
-        addPerson : (root, args) =>{
+        addPerson : async (root, args) =>{
             if(persons.find(p => p.name === args.name && p.phone === args.phone)){
                 throw new UserInputError('It seems that the info is duplicated', 
                 { invalidArgs: args.name })
